@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>MacOS &#8211; Shanavas</title>
+	<atom:link href="/tag/macos/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description>Home!</description>
+	<lastBuildDate>Tue, 27 Sep 2016 15:36:17 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.1</generator>
+
+<image>
+	<url>http://i0.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/favicon.png?fit=16%2C16</url>
+	<title>MacOS &#8211; Shanavas</title>
+	<link>/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">115605667</site>	<item>
+		<title>Running Linux apps in MacOS using docker</title>
+		<link>/running-linux-apps-in-macos-using-docker/</link>
+		<comments>/running-linux-apps-in-macos-using-docker/#comments</comments>
+		<pubDate>Sat, 20 Aug 2016 17:18:59 +0000</pubDate>
+		<dc:creator><![CDATA[shanavas]]></dc:creator>
+				<category><![CDATA[Technology]]></category>
+		<category><![CDATA[docker]]></category>
+		<category><![CDATA[gimp]]></category>
+		<category><![CDATA[inkscape]]></category>
+		<category><![CDATA[MacOS]]></category>
+
+		<guid isPermaLink="false">/?p=278</guid>
+		<description><![CDATA[Docker is an excellent tool to deploy apps to servers with tight control over its...]]></description>
+				<content:encoded><![CDATA[<p><img class="alignright wp-image-286" src="http://i0.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-engine.png?resize=200%2C196" alt="docker-engine" srcset="http://i0.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-engine.png?w=250 250w, http://i0.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-engine.png?resize=60%2C60 60w" sizes="(max-width: 200px) 100vw, 200px" data-recalc-dims="1" /><a href="https://www.docker.com/" target="_blank">Docker</a> is an excellent tool to deploy apps to servers with tight control over its environment. Apps run inside containers, and have access to a file system, libraries and operating system pre-defined by a Dockerfile. Docker is also available for Mac and PC, which means we can run linux apps on these systems without installing a virtual machine.</p>
+<p>Since the apps require a linux environment, docker does not run natively in Mac and PC. Rather, it sets up a linux virtual machine and runs docker engine inside that. Before version 1.12, docker on Mac required installation of virtualbox and docker-machine to manage this linux virtual machine inside which the containers are run. However, latest version of <a href="https://docs.docker.com/docker-for-mac/" target="_blank">docker for mac</a> uses <a href="https://github.com/docker/hyperkit" target="_blank">hypervisor</a> to run operating system as a service and thus has more native feel. Lets install it using <a href="http://brew.sh/" target="_blank">Homebrew</a>:</p>
+<pre style="background: #f9f9f9; color: #080808;">brew cask install docker
+</pre>
+<p>Run the app from the launcher and it will go through the initial setup process. We can now interact with the docker daemon through the shell.</p>
+<p>Next, we will pull a debian image and install gimp and inkscape in it. Open a terminal and create a <code>Dockerfile</code> inside a folder called <code>apps</code>.</p>
+<pre style="background: #f9f9f9; color: #080808;">FROM debian:jessie
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive \
+  apt-get install -y -q gimp inkscape \
+  ttf-dejavu --no-install-recommends
+RUN rm -rf /var/lib/apt/lists/<span style="color: #794938;">*</span>
+CMD <span style="color: #0b6125;">"gimp"</span>
+</pre>
+<p>Next, build the docker image called apps:</p>
+<pre style="background: #f9f9f9; color: #080808;">docker build -t apps <span style="color: #693a17;">.</span>
+</pre>
+<div class='row'><div class='col-sm-6'><figure>
+        				<a href="/wp-content/uploads/2016/08/docker-term.png" class="fancybox-media" data-rel="portfolio">
+        					<div class="text-overlay">
+        					  <div class="info">docker commands</div>
+        					</div>
+        					<img width="618" height="636" src="http://i1.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-term.png?fit=618%2C636" class="attachment-large size-large" alt="docker commands" srcset="http://i1.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-term.png?w=618 618w, http://i1.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-term.png?resize=292%2C300 292w" sizes="(max-width: 618px) 100vw, 618px" data-attachment-id="305" data-orig-file="http://i1.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-term.png?fit=618%2C636" data-orig-size="618,636" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="docker-term" data-image-description="" data-medium-file="http://i1.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-term.png?fit=292%2C300" data-large-file="http://i1.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-term.png?fit=618%2C636" />
+        				</a>
+        			</figure></div></div>
+
+<p>To run graphics inside docker containers, we will need X11 running on Mac. At the time of this writing the stable version of XQuartz (2.7.9) has a bug which prevents graphics forwarding. However, 2.7.10_beta2 works.</p>
+<pre style="background: #f9f9f9; color: #080808;">brew cask install xquartz-beta
+</pre>
+<p>The stable version of xquartz may work if it is higher than 2.7.10. Check the version in home-brew by: <code>brew cask info quartz</code>.</p>
+<p>Start XQuartz and allow connections from network clients in preferences &gt; security. Now the following commands should get gimp running:</p>
+<pre style="background: #f9f9f9; color: #080808;">ip=<span style="color: #0b6125;">$(ifconfig <span style="color: #794938;">|</span> grep <span style="color: #0b6125;">"inet "</span> <span style="color: #794938;">|</span> grep -v 127.0.0.1 <span style="color: #794938;">|</span> awk <span style="color: #0b6125;">'{print $2}'</span>)</span>
+xhost + <span style="color: #234a97;">$ip</span>
+docker run --rm -it -e DISPLAY=<span style="color: #234a97;">$ip</span>:0 -v <span style="color: #234a97;">$HOME</span>/Downloads:/root/Downloads apps
+</pre>
+<p>This will also share the ~/Downloads folder with the container. To run inkscape:</p>
+<pre style="background: #f9f9f9; color: #080808;">docker run --rm -it -e DISPLAY=<span style="color: #234a97;">$ip</span>:0 -v <span style="color: #234a97;">$HOME</span>/Downloads:/root/Downloads apps inkscape
+</pre>
+<p>Any changes made to gimp itself will be lost when the app is closed. Any additional plugins or customizations should be included in the Dockerfile to make them permanent.</p>
+]]></content:encoded>
+			<wfw:commentRss>/running-linux-apps-in-macos-using-docker/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">278</post-id>	</item>
+		<item>
+		<title>Remote Desktop with VNC</title>
+		<link>/remote-desktop-with-vnc/</link>
+		<comments>/remote-desktop-with-vnc/#respond</comments>
+		<pubDate>Wed, 20 Aug 2014 22:23:55 +0000</pubDate>
+		<dc:creator><![CDATA[shanavas]]></dc:creator>
+				<category><![CDATA[Technology]]></category>
+		<category><![CDATA[MacOS]]></category>
+		<category><![CDATA[ssh]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[vnc]]></category>
+
+		<guid isPermaLink="false">http://shanavasv.com/?p=329</guid>
+		<description><![CDATA[I have been looking for a way to securely connect to the work PC that...]]></description>
+				<content:encoded><![CDATA[<p>I have been looking for a way to securely connect to the work PC that runs Ubuntu from my Macbook running Mavericks using remote desktop. The work PC is behind a firewall, so <a href="http://opennx.net/">Open NX</a> was suggested, but it does not play well with OS X. So I settled for VNC over an <a href="http://en.wikipedia.org/wiki/Tunneling_protocol">ssh-tunnel</a>. The goal was to access the running desktop and not a clone, so I decided to use <a href="http://www.karlrunge.com/x11vnc/">x11vnc</a> as the server. Alternatively, one can use <a href="http://www.tightvnc.com/">TightVNC</a> to access a cloned desktop. I tried various VNC clients on Mac, and liked the oddly named <a href="http://sourceforge.net/projects/chicken/">Chicken</a>. But it turns out that Apple ships a VNC client with OS X; which is not very fancy, but meets my need.</p>
+<p>The Unity desktop in Ubuntu is very slow over VNC for some reason. So, the first step is to switch to <a href="www.xfce.org">Xfce</a> or xubuntu desktop. Also installed <code>x11vnc</code> while at it.</p>
+<pre style="background: #f9f9f9; color: #080808;">sudo apt-get install xubuntu-desktop x11vnc
+</pre>
+<p>For security, it better not to run VNC server all the time, but rather start it when needed. This can be accomplished by the following command at the terminal from the home computer (Macbook):</p>
+<pre style="background: #f9f9f9; color: #080808;">ssh -t -L 5900:localhost:5900 remote-host <span style="color: #0b6125;">'x11vnc -localhost -display :0
+</span></pre>
+<p>Where <code>remote-host</code> is the work PC. The above command starts <code>x11vnc</code> in the work PC and forwards the port to the home machine. One can now connect to it by typing in another terminal,</p>
+<pre style="background: #f9f9f9; color: #080808;">open vnc://localhost
+</pre>
+<p>It is advisable to create a VNC password for the server in the <code>remote-host</code> for added security. Refer to <code>x11vnc</code> <a href="http://www.karlrunge.com/x11vnc/">web</a> or man page for instructions. The above command will stop the server once the client exists, or <code>-forever</code> can be used to keep it alive. Then it will need to be stopped by <code>CTRL-c</code>.</p>
+<p>Unfortunately, this method works only if the <code>remote-host</code> is logged in. When at the lock-screen in Ubuntu, the virtual terminal runs at display <code>:1</code> (rather than at <code>:0</code>), so the <code>x11vnc</code> will have to be started with arguments <code>-auth /var/run/lightdm/root/:1</code>. But after unlocking the session, the VT falls back to <code>:0</code>, so <code>x11vnc</code> needs to be restarted with default VT. To work around this problem, I wrote the following script:</p>
+<pre style="background: #f9f9f9; color: #080808;"><span style="color: #5a525f; font-style: italic;">#!/bin/bash</span>
+vncpa=<span style="color: #234a97;">$HOME</span>/.vnc/passwd
+vtpath=/var/run/lightdm/root
+vtuser=:0
+vtlock=:1
+<span style="color: #794938;">while</span> [ -e <span style="color: #0b6125;">"<span style="color: #234a97;">$vtpath</span>/<span style="color: #234a97;">$vtlock</span>"</span> ]<span style="color: #794938;">;</span> <span style="color: #794938;">do</span>
+   <span style="color: #693a17;">echo</span> <span style="color: #0b6125;">"screen locked"</span>
+   x11vnc -localhost -rfbauth <span style="color: #234a97;">$vncpa</span> -display <span style="color: #234a97;">$vtlock</span> -auth <span style="color: #234a97;">$vtpath</span>/<span style="color: #234a97;">$vtlock</span>
+   sleep 2
+<span style="color: #794938;">done</span>
+<span style="color: #693a17;">echo</span> <span style="color: #0b6125;">"screen unlocked"</span>
+x11vnc -localhost -rfbauth <span style="color: #234a97;">$vncpa</span> -nevershared -forever -display <span style="color: #234a97;">$vtuser</span> -auth <span style="color: #234a97;">$vtpath</span>/<span style="color: #234a97;">$vtuser</span>
+</pre>
+<p>Saved it as <code>~/bin/x11run</code> and made it executable. Note that, access to the folder <code>/var/run/lighdtm</code> requires root privileges, so this script has to be run with <code>sudo</code>. So, to establish the tunnel, start the server and client in a single script, I use the ever-useful <code>expect</code> with ssh.</p>
+<pre style="background: #f9f9f9; color: #080808;"><span style="color: #5a525f; font-style: italic;">#!/bin/bash</span>
+<span style="color: #693a17;">echo</span> -n <span style="color: #0b6125;">"ID: "</span><span style="color: #794938;">;</span> <span style="color: #693a17;">read</span> paD
+sleep 5 <span style="color: #794938;">&amp;&amp;</span> open vnc://localhost <span style="color: #794938;">&amp;</span>
+/usr/bin/expect <span style="color: #794938;">&lt;</span><span style="color: #794938;">&lt;</span> EOF
+<span style="color: #693a17;">set</span> timeout 120
+spawn ssh -L 5900:localhost:5900 <span style="color: #ff0000;">remote-host</span>
+
+expect <span style="color: #0b6125;">"<span style="color: #ff0000;">remote-host</span>:~$ "</span>
+send <span style="color: #0b6125;">"sudo ~/bin/x11run\r"</span>
+
+expect <span style="color: #0b6125;">"*for <span style="color: #ff0000;">user</span>: "</span>
+send <span style="color: #0b6125;">"<span style="color: #234a97;">$paD</span>\r"</span>
+
+expect eof
+interact
+EOF
+</pre>
+<p>With appropriate modifications to those marked in <span style="color: red;">red</span>, it should work!</p>
+]]></content:encoded>
+			<wfw:commentRss>/remote-desktop-with-vnc/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">329</post-id>	</item>
+	</channel>
+</rss>

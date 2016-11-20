@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>bibtex &#8211; Shanavas</title>
+	<atom:link href="/tag/bibtex/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description>Home!</description>
+	<lastBuildDate>Tue, 27 Sep 2016 15:36:17 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.1</generator>
+
+<image>
+	<url>http://i0.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/favicon.png?fit=16%2C16</url>
+	<title>bibtex &#8211; Shanavas</title>
+	<link>/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">115605667</site>	<item>
+		<title>BibteX from DOI</title>
+		<link>/bibtex-from-doi/</link>
+		<comments>/bibtex-from-doi/#respond</comments>
+		<pubDate>Fri, 21 Mar 2014 01:02:26 +0000</pubDate>
+		<dc:creator><![CDATA[shanavas]]></dc:creator>
+				<category><![CDATA[Research]]></category>
+		<category><![CDATA[bibtex]]></category>
+		<category><![CDATA[doi]]></category>
+
+		<guid isPermaLink="false">http://shanavasv.com/?p=336</guid>
+		<description><![CDATA[I have been using Mendeley for reference management since it&#8217;s inception. It organizes the articles...]]></description>
+				<content:encoded><![CDATA[<p>I have been using <a href="http://www.mendeley.com/">Mendeley</a> for reference management since it&#8217;s inception. It organizes the articles well, keeps the library synced with the cloud and most importantly allows exporting the references as bib files automatically for use in LaTex writing. But I always found the interface rather dull. The more recent <a href="http://www.readcube.com/">ReadCube</a> is fashionable and has some sleek document enhancing abilities. It can download the documents from the internet, fetch references and shows related materials from Google Scholar and PubMed. Unfortunately, the at this time it has poor citation abilities, although the developers promise it&#8217;s coming in early 2014.</p>
+<p>Most publishers have a &#8220;download citation&#8221; button on the article pages, but not all of them export in bib format. Looking for an alternative, I learned that <a href="http://www.crossref.org/">Crossref</a> now has a nice feature with which one can get the bibliography entry from the <a href="http://dx.doi.org/">DOI</a>. More info <a href="http://www.crossref.org/CrossTech/2011/11/turning_dois_into_formatted_ci.html">here</a>. Use the following code at the commandline (needs <a href="http://curl.haxx.se/">curl</a> installed)</p>
+<pre style="background:#f9f9f9;color:#080808">curl -LH <span style="color:#0b6125">"Accept: text/bibliography; style=bibtex"</span> http://dx.doi.org/10.1103/PhysRevLett.112.086802
+</pre>
+<p>which returns:</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#794938">@article</span>{<span style="color:#bf4f24">Shanavas_Satpathy_2014</span>, 
+<span style="color:#0b6125">title</span><span style="color:#794938">=</span><span style="color:#0b6125">{Electric Field Tuning of the Rashba Effect in the Polar Perovskite Structures}</span>,
+<span style="color:#0b6125">volume</span><span style="color:#794938">=</span><span style="color:#0b6125">{112}</span>, <span style="color:#0b6125">ISSN</span><span style="color:#794938">=</span><span style="color:#0b6125">{1079-7114}</span>, 
+<span style="color:#0b6125">url</span><span style="color:#794938">=</span><span style="color:#0b6125">{http://dx.doi.org/10.1103/PhysRevLett.112.086802}</span>, <span style="color:#0b6125">DOI</span><span style="color:#794938">=</span><span style="color:#0b6125">{10.1103/physrevlett.112.086802}</span>, 
+<span style="color:#0b6125">number</span><span style="color:#794938">=</span><span style="color:#0b6125">{8}</span>, 
+<span style="color:#0b6125">journal</span><span style="color:#794938">=</span><span style="color:#0b6125">{Physical Review Letters}</span>, 
+<span style="color:#0b6125">publisher</span><span style="color:#794938">=</span><span style="color:#0b6125">{American Physical Society (APS)}</span>, <span style="color:#0b6125">author</span><span style="color:#794938">=</span><span style="color:#0b6125">{Shanavas, K. V. and Satpathy, S.}</span>, 
+<span style="color:#0b6125">year</span><span style="color:#794938">=</span><span style="color:#0b6125">{2014}</span>, 
+<span style="color:#0b6125">month</span><span style="color:#794938">=</span><span style="color:#0b6125">{Feb}</span>}
+</pre>
+<p>I wrote a function which can be put in the <code>.bashrc</code> file. It will seperate the entry into multiple lines for readability</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#bf4f24">doi2bib</span>() { curl -LH <span style="color:#0b6125">"Accept: text/bibliography; style=bibtex"</span> http://dx.doi.org/<span style="color:#0b6125">"<span style="color:#234a97">$@</span>"</span> <span style="color:#794938">|</span> awk <span style="color:#0b6125">'{sub(",",",\n"); gsub("},","},\n"); print $0}'</span><span style="color:#794938">;</span> }
+</pre>
+<p>To use it, simply run <code>doi2bib 10.1103/PhysRevLett.112.086802</code> from the command line.</p>
+<p>At this stage there are three problems with this method:</p>
+<ol>
+<li>The journal abbreviations are not always used</li>
+<li>The author list is truncated if it is too long</li>
+<li>For many APS articles page numbers are not returned</li>
+</ol>
+]]></content:encoded>
+			<wfw:commentRss>/bibtex-from-doi/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">336</post-id>	</item>
+	</channel>
+</rss>

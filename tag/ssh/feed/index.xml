@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ssh &#8211; Shanavas</title>
+	<atom:link href="/tag/ssh/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description>Home!</description>
+	<lastBuildDate>Tue, 27 Sep 2016 15:36:17 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.1</generator>
+
+<image>
+	<url>http://i0.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/favicon.png?fit=16%2C16</url>
+	<title>ssh &#8211; Shanavas</title>
+	<link>/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">115605667</site>	<item>
+		<title>Remote Desktop with VNC</title>
+		<link>/remote-desktop-with-vnc/</link>
+		<comments>/remote-desktop-with-vnc/#respond</comments>
+		<pubDate>Wed, 20 Aug 2014 22:23:55 +0000</pubDate>
+		<dc:creator><![CDATA[shanavas]]></dc:creator>
+				<category><![CDATA[Technology]]></category>
+		<category><![CDATA[MacOS]]></category>
+		<category><![CDATA[ssh]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[vnc]]></category>
+
+		<guid isPermaLink="false">http://shanavasv.com/?p=329</guid>
+		<description><![CDATA[I have been looking for a way to securely connect to the work PC that...]]></description>
+				<content:encoded><![CDATA[<p>I have been looking for a way to securely connect to the work PC that runs Ubuntu from my Macbook running Mavericks using remote desktop. The work PC is behind a firewall, so <a href="http://opennx.net/">Open NX</a> was suggested, but it does not play well with OS X. So I settled for VNC over an <a href="http://en.wikipedia.org/wiki/Tunneling_protocol">ssh-tunnel</a>. The goal was to access the running desktop and not a clone, so I decided to use <a href="http://www.karlrunge.com/x11vnc/">x11vnc</a> as the server. Alternatively, one can use <a href="http://www.tightvnc.com/">TightVNC</a> to access a cloned desktop. I tried various VNC clients on Mac, and liked the oddly named <a href="http://sourceforge.net/projects/chicken/">Chicken</a>. But it turns out that Apple ships a VNC client with OS X; which is not very fancy, but meets my need.</p>
+<p>The Unity desktop in Ubuntu is very slow over VNC for some reason. So, the first step is to switch to <a href="www.xfce.org">Xfce</a> or xubuntu desktop. Also installed <code>x11vnc</code> while at it.</p>
+<pre style="background: #f9f9f9; color: #080808;">sudo apt-get install xubuntu-desktop x11vnc
+</pre>
+<p>For security, it better not to run VNC server all the time, but rather start it when needed. This can be accomplished by the following command at the terminal from the home computer (Macbook):</p>
+<pre style="background: #f9f9f9; color: #080808;">ssh -t -L 5900:localhost:5900 remote-host <span style="color: #0b6125;">'x11vnc -localhost -display :0
+</span></pre>
+<p>Where <code>remote-host</code> is the work PC. The above command starts <code>x11vnc</code> in the work PC and forwards the port to the home machine. One can now connect to it by typing in another terminal,</p>
+<pre style="background: #f9f9f9; color: #080808;">open vnc://localhost
+</pre>
+<p>It is advisable to create a VNC password for the server in the <code>remote-host</code> for added security. Refer to <code>x11vnc</code> <a href="http://www.karlrunge.com/x11vnc/">web</a> or man page for instructions. The above command will stop the server once the client exists, or <code>-forever</code> can be used to keep it alive. Then it will need to be stopped by <code>CTRL-c</code>.</p>
+<p>Unfortunately, this method works only if the <code>remote-host</code> is logged in. When at the lock-screen in Ubuntu, the virtual terminal runs at display <code>:1</code> (rather than at <code>:0</code>), so the <code>x11vnc</code> will have to be started with arguments <code>-auth /var/run/lightdm/root/:1</code>. But after unlocking the session, the VT falls back to <code>:0</code>, so <code>x11vnc</code> needs to be restarted with default VT. To work around this problem, I wrote the following script:</p>
+<pre style="background: #f9f9f9; color: #080808;"><span style="color: #5a525f; font-style: italic;">#!/bin/bash</span>
+vncpa=<span style="color: #234a97;">$HOME</span>/.vnc/passwd
+vtpath=/var/run/lightdm/root
+vtuser=:0
+vtlock=:1
+<span style="color: #794938;">while</span> [ -e <span style="color: #0b6125;">"<span style="color: #234a97;">$vtpath</span>/<span style="color: #234a97;">$vtlock</span>"</span> ]<span style="color: #794938;">;</span> <span style="color: #794938;">do</span>
+   <span style="color: #693a17;">echo</span> <span style="color: #0b6125;">"screen locked"</span>
+   x11vnc -localhost -rfbauth <span style="color: #234a97;">$vncpa</span> -display <span style="color: #234a97;">$vtlock</span> -auth <span style="color: #234a97;">$vtpath</span>/<span style="color: #234a97;">$vtlock</span>
+   sleep 2
+<span style="color: #794938;">done</span>
+<span style="color: #693a17;">echo</span> <span style="color: #0b6125;">"screen unlocked"</span>
+x11vnc -localhost -rfbauth <span style="color: #234a97;">$vncpa</span> -nevershared -forever -display <span style="color: #234a97;">$vtuser</span> -auth <span style="color: #234a97;">$vtpath</span>/<span style="color: #234a97;">$vtuser</span>
+</pre>
+<p>Saved it as <code>~/bin/x11run</code> and made it executable. Note that, access to the folder <code>/var/run/lighdtm</code> requires root privileges, so this script has to be run with <code>sudo</code>. So, to establish the tunnel, start the server and client in a single script, I use the ever-useful <code>expect</code> with ssh.</p>
+<pre style="background: #f9f9f9; color: #080808;"><span style="color: #5a525f; font-style: italic;">#!/bin/bash</span>
+<span style="color: #693a17;">echo</span> -n <span style="color: #0b6125;">"ID: "</span><span style="color: #794938;">;</span> <span style="color: #693a17;">read</span> paD
+sleep 5 <span style="color: #794938;">&amp;&amp;</span> open vnc://localhost <span style="color: #794938;">&amp;</span>
+/usr/bin/expect <span style="color: #794938;">&lt;</span><span style="color: #794938;">&lt;</span> EOF
+<span style="color: #693a17;">set</span> timeout 120
+spawn ssh -L 5900:localhost:5900 <span style="color: #ff0000;">remote-host</span>
+
+expect <span style="color: #0b6125;">"<span style="color: #ff0000;">remote-host</span>:~$ "</span>
+send <span style="color: #0b6125;">"sudo ~/bin/x11run\r"</span>
+
+expect <span style="color: #0b6125;">"*for <span style="color: #ff0000;">user</span>: "</span>
+send <span style="color: #0b6125;">"<span style="color: #234a97;">$paD</span>\r"</span>
+
+expect eof
+interact
+EOF
+</pre>
+<p>With appropriate modifications to those marked in <span style="color: red;">red</span>, it should work!</p>
+]]></content:encoded>
+			<wfw:commentRss>/remote-desktop-with-vnc/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">329</post-id>	</item>
+		<item>
+		<title>SSH Tunnel</title>
+		<link>/ssh-tunnel/</link>
+		<comments>/ssh-tunnel/#respond</comments>
+		<pubDate>Mon, 14 Jul 2014 20:25:39 +0000</pubDate>
+		<dc:creator><![CDATA[shanavas]]></dc:creator>
+				<category><![CDATA[Technology]]></category>
+		<category><![CDATA[ssh]]></category>
+
+		<guid isPermaLink="false">http://shanavasv.com/?p=317</guid>
+		<description><![CDATA[Most of the systems I need to access are behind other servers that act as...]]></description>
+				<content:encoded><![CDATA[<p>Most of the systems I need to access are behind other servers that act as firewalls. This makes ssh connection a painful two step process. Luckily, <code>ssh-keys</code> can remove typing passwords and few additions to <code>~/.ssh/config</code> can make the firewall invisible.</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#a71d5d;font-style:italic">Host</span> <span style="color:#bf4f24">machineA</span>
+  <span style="color:#794938">Compression</span> yes
+  <span style="color:#794938">HostName</span> machineA.company.org
+  <span style="color:#794938">User</span> UserNameA
+
+<span style="color:#a71d5d;font-style:italic">Host</span> <span style="color:#bf4f24">machineB</span>
+  <span style="color:#794938">ProxyCommand</span> ssh machineA -W %h:%p
+  <span style="color:#794938">User</span> UserNameB
+</pre>
+<p>Here, <code>machineA</code> is the firewall and <code>machineB</code> is the server behind it. Usernames can be specified if they are different from that of the local machine. Now, typing <code>ssh machineB</code> will tunnel the connection through <code>machineA</code> automatically. However, some servers may not allow tunneling.</p>
+<h3>Multiple SSH</h3>
+<p>One of the servers at work uses a secureID token for login, so password-less login with <code>ssh-key</code> is not an option. Opening multiple connections to this server was tedious, till I realized that SSH has a cool option to make all subsequent connections tunnel through the first connection to that server. With this enabled in <code>~/.ssh/config</code>, only the first connection requires login/password:</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#794938">ControlMaster</span> auto
+<span style="color:#794938">ControlPath</span> ~/.ssh/control:%h:%p:%r
+</pre>
+]]></content:encoded>
+			<wfw:commentRss>/ssh-tunnel/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">317</post-id>	</item>
+	</channel>
+</rss>

@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Shanavas</title>
+	<atom:link href="/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description>Home!</description>
+	<lastBuildDate>Tue, 27 Sep 2016 15:36:17 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.1</generator>
+
+<image>
+	<url>http://i0.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/favicon.png?fit=16%2C16</url>
+	<title>Shanavas</title>
+	<link>/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">115605667</site>	<item>
+		<title>Running Linux apps in MacOS using docker</title>
+		<link>/running-linux-apps-in-macos-using-docker/</link>
+		<comments>/running-linux-apps-in-macos-using-docker/#comments</comments>
+		<pubDate>Sat, 20 Aug 2016 17:18:59 +0000</pubDate>
+		<dc:creator><![CDATA[shanavas]]></dc:creator>
+				<category><![CDATA[Technology]]></category>
+		<category><![CDATA[docker]]></category>
+		<category><![CDATA[gimp]]></category>
+		<category><![CDATA[inkscape]]></category>
+		<category><![CDATA[MacOS]]></category>
+
+		<guid isPermaLink="false">/?p=278</guid>
+		<description><![CDATA[Docker is an excellent tool to deploy apps to servers with tight control over its...]]></description>
+				<content:encoded><![CDATA[<p><img class="alignright wp-image-286" src="http://i0.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-engine.png?resize=200%2C196" alt="docker-engine" srcset="http://i0.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-engine.png?w=250 250w, http://i0.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-engine.png?resize=60%2C60 60w" sizes="(max-width: 200px) 100vw, 200px" data-recalc-dims="1" /><a href="https://www.docker.com/" target="_blank">Docker</a> is an excellent tool to deploy apps to servers with tight control over its environment. Apps run inside containers, and have access to a file system, libraries and operating system pre-defined by a Dockerfile. Docker is also available for Mac and PC, which means we can run linux apps on these systems without installing a virtual machine.</p>
+<p>Since the apps require a linux environment, docker does not run natively in Mac and PC. Rather, it sets up a linux virtual machine and runs docker engine inside that. Before version 1.12, docker on Mac required installation of virtualbox and docker-machine to manage this linux virtual machine inside which the containers are run. However, latest version of <a href="https://docs.docker.com/docker-for-mac/" target="_blank">docker for mac</a> uses <a href="https://github.com/docker/hyperkit" target="_blank">hypervisor</a> to run operating system as a service and thus has more native feel. Lets install it using <a href="http://brew.sh/" target="_blank">Homebrew</a>:</p>
+<pre style="background: #f9f9f9; color: #080808;">brew cask install docker
+</pre>
+<p>Run the app from the launcher and it will go through the initial setup process. We can now interact with the docker daemon through the shell.</p>
+<p>Next, we will pull a debian image and install gimp and inkscape in it. Open a terminal and create a <code>Dockerfile</code> inside a folder called <code>apps</code>.</p>
+<pre style="background: #f9f9f9; color: #080808;">FROM debian:jessie
+RUN apt-get update
+RUN DEBIAN_FRONTEND=noninteractive \
+  apt-get install -y -q gimp inkscape \
+  ttf-dejavu --no-install-recommends
+RUN rm -rf /var/lib/apt/lists/<span style="color: #794938;">*</span>
+CMD <span style="color: #0b6125;">"gimp"</span>
+</pre>
+<p>Next, build the docker image called apps:</p>
+<pre style="background: #f9f9f9; color: #080808;">docker build -t apps <span style="color: #693a17;">.</span>
+</pre>
+<div class='row'><div class='col-sm-6'><figure>
+        				<a href="/wp-content/uploads/2016/08/docker-term.png" class="fancybox-media" data-rel="portfolio">
+        					<div class="text-overlay">
+        					  <div class="info">docker commands</div>
+        					</div>
+        					<img width="618" height="636" src="http://i1.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-term.png?fit=618%2C636" class="attachment-large size-large" alt="docker commands" srcset="http://i1.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-term.png?w=618 618w, http://i1.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-term.png?resize=292%2C300 292w" sizes="(max-width: 618px) 100vw, 618px" data-attachment-id="305" data-orig-file="http://i1.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-term.png?fit=618%2C636" data-orig-size="618,636" data-comments-opened="1" data-image-meta="{&quot;aperture&quot;:&quot;0&quot;,&quot;credit&quot;:&quot;&quot;,&quot;camera&quot;:&quot;&quot;,&quot;caption&quot;:&quot;&quot;,&quot;created_timestamp&quot;:&quot;0&quot;,&quot;copyright&quot;:&quot;&quot;,&quot;focal_length&quot;:&quot;0&quot;,&quot;iso&quot;:&quot;0&quot;,&quot;shutter_speed&quot;:&quot;0&quot;,&quot;title&quot;:&quot;&quot;,&quot;orientation&quot;:&quot;0&quot;}" data-image-title="docker-term" data-image-description="" data-medium-file="http://i1.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-term.png?fit=292%2C300" data-large-file="http://i1.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/docker-term.png?fit=618%2C636" />
+        				</a>
+        			</figure></div></div>
+
+<p>To run graphics inside docker containers, we will need X11 running on Mac. At the time of this writing the stable version of XQuartz (2.7.9) has a bug which prevents graphics forwarding. However, 2.7.10_beta2 works.</p>
+<pre style="background: #f9f9f9; color: #080808;">brew cask install xquartz-beta
+</pre>
+<p>The stable version of xquartz may work if it is higher than 2.7.10. Check the version in home-brew by: <code>brew cask info quartz</code>.</p>
+<p>Start XQuartz and allow connections from network clients in preferences &gt; security. Now the following commands should get gimp running:</p>
+<pre style="background: #f9f9f9; color: #080808;">ip=<span style="color: #0b6125;">$(ifconfig <span style="color: #794938;">|</span> grep <span style="color: #0b6125;">"inet "</span> <span style="color: #794938;">|</span> grep -v 127.0.0.1 <span style="color: #794938;">|</span> awk <span style="color: #0b6125;">'{print $2}'</span>)</span>
+xhost + <span style="color: #234a97;">$ip</span>
+docker run --rm -it -e DISPLAY=<span style="color: #234a97;">$ip</span>:0 -v <span style="color: #234a97;">$HOME</span>/Downloads:/root/Downloads apps
+</pre>
+<p>This will also share the ~/Downloads folder with the container. To run inkscape:</p>
+<pre style="background: #f9f9f9; color: #080808;">docker run --rm -it -e DISPLAY=<span style="color: #234a97;">$ip</span>:0 -v <span style="color: #234a97;">$HOME</span>/Downloads:/root/Downloads apps inkscape
+</pre>
+<p>Any changes made to gimp itself will be lost when the app is closed. Any additional plugins or customizations should be included in the Dockerfile to make them permanent.</p>
+]]></content:encoded>
+			<wfw:commentRss>/running-linux-apps-in-macos-using-docker/feed/</wfw:commentRss>
+		<slash:comments>1</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">278</post-id>	</item>
+		<item>
+		<title>Remote Desktop with VNC</title>
+		<link>/remote-desktop-with-vnc/</link>
+		<comments>/remote-desktop-with-vnc/#respond</comments>
+		<pubDate>Wed, 20 Aug 2014 22:23:55 +0000</pubDate>
+		<dc:creator><![CDATA[shanavas]]></dc:creator>
+				<category><![CDATA[Technology]]></category>
+		<category><![CDATA[MacOS]]></category>
+		<category><![CDATA[ssh]]></category>
+		<category><![CDATA[Ubuntu]]></category>
+		<category><![CDATA[vnc]]></category>
+
+		<guid isPermaLink="false">http://shanavasv.com/?p=329</guid>
+		<description><![CDATA[I have been looking for a way to securely connect to the work PC that...]]></description>
+				<content:encoded><![CDATA[<p>I have been looking for a way to securely connect to the work PC that runs Ubuntu from my Macbook running Mavericks using remote desktop. The work PC is behind a firewall, so <a href="http://opennx.net/">Open NX</a> was suggested, but it does not play well with OS X. So I settled for VNC over an <a href="http://en.wikipedia.org/wiki/Tunneling_protocol">ssh-tunnel</a>. The goal was to access the running desktop and not a clone, so I decided to use <a href="http://www.karlrunge.com/x11vnc/">x11vnc</a> as the server. Alternatively, one can use <a href="http://www.tightvnc.com/">TightVNC</a> to access a cloned desktop. I tried various VNC clients on Mac, and liked the oddly named <a href="http://sourceforge.net/projects/chicken/">Chicken</a>. But it turns out that Apple ships a VNC client with OS X; which is not very fancy, but meets my need.</p>
+<p>The Unity desktop in Ubuntu is very slow over VNC for some reason. So, the first step is to switch to <a href="www.xfce.org">Xfce</a> or xubuntu desktop. Also installed <code>x11vnc</code> while at it.</p>
+<pre style="background: #f9f9f9; color: #080808;">sudo apt-get install xubuntu-desktop x11vnc
+</pre>
+<p>For security, it better not to run VNC server all the time, but rather start it when needed. This can be accomplished by the following command at the terminal from the home computer (Macbook):</p>
+<pre style="background: #f9f9f9; color: #080808;">ssh -t -L 5900:localhost:5900 remote-host <span style="color: #0b6125;">'x11vnc -localhost -display :0
+</span></pre>
+<p>Where <code>remote-host</code> is the work PC. The above command starts <code>x11vnc</code> in the work PC and forwards the port to the home machine. One can now connect to it by typing in another terminal,</p>
+<pre style="background: #f9f9f9; color: #080808;">open vnc://localhost
+</pre>
+<p>It is advisable to create a VNC password for the server in the <code>remote-host</code> for added security. Refer to <code>x11vnc</code> <a href="http://www.karlrunge.com/x11vnc/">web</a> or man page for instructions. The above command will stop the server once the client exists, or <code>-forever</code> can be used to keep it alive. Then it will need to be stopped by <code>CTRL-c</code>.</p>
+<p>Unfortunately, this method works only if the <code>remote-host</code> is logged in. When at the lock-screen in Ubuntu, the virtual terminal runs at display <code>:1</code> (rather than at <code>:0</code>), so the <code>x11vnc</code> will have to be started with arguments <code>-auth /var/run/lightdm/root/:1</code>. But after unlocking the session, the VT falls back to <code>:0</code>, so <code>x11vnc</code> needs to be restarted with default VT. To work around this problem, I wrote the following script:</p>
+<pre style="background: #f9f9f9; color: #080808;"><span style="color: #5a525f; font-style: italic;">#!/bin/bash</span>
+vncpa=<span style="color: #234a97;">$HOME</span>/.vnc/passwd
+vtpath=/var/run/lightdm/root
+vtuser=:0
+vtlock=:1
+<span style="color: #794938;">while</span> [ -e <span style="color: #0b6125;">"<span style="color: #234a97;">$vtpath</span>/<span style="color: #234a97;">$vtlock</span>"</span> ]<span style="color: #794938;">;</span> <span style="color: #794938;">do</span>
+   <span style="color: #693a17;">echo</span> <span style="color: #0b6125;">"screen locked"</span>
+   x11vnc -localhost -rfbauth <span style="color: #234a97;">$vncpa</span> -display <span style="color: #234a97;">$vtlock</span> -auth <span style="color: #234a97;">$vtpath</span>/<span style="color: #234a97;">$vtlock</span>
+   sleep 2
+<span style="color: #794938;">done</span>
+<span style="color: #693a17;">echo</span> <span style="color: #0b6125;">"screen unlocked"</span>
+x11vnc -localhost -rfbauth <span style="color: #234a97;">$vncpa</span> -nevershared -forever -display <span style="color: #234a97;">$vtuser</span> -auth <span style="color: #234a97;">$vtpath</span>/<span style="color: #234a97;">$vtuser</span>
+</pre>
+<p>Saved it as <code>~/bin/x11run</code> and made it executable. Note that, access to the folder <code>/var/run/lighdtm</code> requires root privileges, so this script has to be run with <code>sudo</code>. So, to establish the tunnel, start the server and client in a single script, I use the ever-useful <code>expect</code> with ssh.</p>
+<pre style="background: #f9f9f9; color: #080808;"><span style="color: #5a525f; font-style: italic;">#!/bin/bash</span>
+<span style="color: #693a17;">echo</span> -n <span style="color: #0b6125;">"ID: "</span><span style="color: #794938;">;</span> <span style="color: #693a17;">read</span> paD
+sleep 5 <span style="color: #794938;">&amp;&amp;</span> open vnc://localhost <span style="color: #794938;">&amp;</span>
+/usr/bin/expect <span style="color: #794938;">&lt;</span><span style="color: #794938;">&lt;</span> EOF
+<span style="color: #693a17;">set</span> timeout 120
+spawn ssh -L 5900:localhost:5900 <span style="color: #ff0000;">remote-host</span>
+
+expect <span style="color: #0b6125;">"<span style="color: #ff0000;">remote-host</span>:~$ "</span>
+send <span style="color: #0b6125;">"sudo ~/bin/x11run\r"</span>
+
+expect <span style="color: #0b6125;">"*for <span style="color: #ff0000;">user</span>: "</span>
+send <span style="color: #0b6125;">"<span style="color: #234a97;">$paD</span>\r"</span>
+
+expect eof
+interact
+EOF
+</pre>
+<p>With appropriate modifications to those marked in <span style="color: red;">red</span>, it should work!</p>
+]]></content:encoded>
+			<wfw:commentRss>/remote-desktop-with-vnc/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">329</post-id>	</item>
+		<item>
+		<title>SSH Tunnel</title>
+		<link>/ssh-tunnel/</link>
+		<comments>/ssh-tunnel/#respond</comments>
+		<pubDate>Mon, 14 Jul 2014 20:25:39 +0000</pubDate>
+		<dc:creator><![CDATA[shanavas]]></dc:creator>
+				<category><![CDATA[Technology]]></category>
+		<category><![CDATA[ssh]]></category>
+
+		<guid isPermaLink="false">http://shanavasv.com/?p=317</guid>
+		<description><![CDATA[Most of the systems I need to access are behind other servers that act as...]]></description>
+				<content:encoded><![CDATA[<p>Most of the systems I need to access are behind other servers that act as firewalls. This makes ssh connection a painful two step process. Luckily, <code>ssh-keys</code> can remove typing passwords and few additions to <code>~/.ssh/config</code> can make the firewall invisible.</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#a71d5d;font-style:italic">Host</span> <span style="color:#bf4f24">machineA</span>
+  <span style="color:#794938">Compression</span> yes
+  <span style="color:#794938">HostName</span> machineA.company.org
+  <span style="color:#794938">User</span> UserNameA
+
+<span style="color:#a71d5d;font-style:italic">Host</span> <span style="color:#bf4f24">machineB</span>
+  <span style="color:#794938">ProxyCommand</span> ssh machineA -W %h:%p
+  <span style="color:#794938">User</span> UserNameB
+</pre>
+<p>Here, <code>machineA</code> is the firewall and <code>machineB</code> is the server behind it. Usernames can be specified if they are different from that of the local machine. Now, typing <code>ssh machineB</code> will tunnel the connection through <code>machineA</code> automatically. However, some servers may not allow tunneling.</p>
+<h3>Multiple SSH</h3>
+<p>One of the servers at work uses a secureID token for login, so password-less login with <code>ssh-key</code> is not an option. Opening multiple connections to this server was tedious, till I realized that SSH has a cool option to make all subsequent connections tunnel through the first connection to that server. With this enabled in <code>~/.ssh/config</code>, only the first connection requires login/password:</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#794938">ControlMaster</span> auto
+<span style="color:#794938">ControlPath</span> ~/.ssh/control:%h:%p:%r
+</pre>
+]]></content:encoded>
+			<wfw:commentRss>/ssh-tunnel/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">317</post-id>	</item>
+		<item>
+		<title>Compile VASP on OSX</title>
+		<link>/compile-vasp-on-osx/</link>
+		<comments>/compile-vasp-on-osx/#respond</comments>
+		<pubDate>Thu, 24 Apr 2014 14:13:07 +0000</pubDate>
+		<dc:creator><![CDATA[shanavas]]></dc:creator>
+				<category><![CDATA[Uncategorized]]></category>
+
+		<guid isPermaLink="false">http://shanavasv.com/?p=343</guid>
+		<description><![CDATA[VASP is a pseudopotential based ab-initio code useful to study electronic structure of materials. Although...]]></description>
+				<content:encoded><![CDATA[<p><a href="https://www.vasp.at/">VASP</a> is a pseudopotential based ab-initio code useful to study electronic structure of materials. Although most calculations are done with the help of parallel computing clusters, it is good to have it on the laptop for some quick testing. However, when I switched to Macbook from a HP Envy laptop running <a href="http://ubuntu.com/">Ubuntu</a>, I realised it is not easy to get it running in OS X. I finally got it to work, with some help from this <a href="http://www.nsc.liu.se/~pla/blog/2011/06/28/vaspcompile/">link</a>.</p>
+<p>Below are the instruction to compile VASP version 5.3.5 with gfortran. First step is to build the vasp.5.lib. Copy the linux_gfortran makefile:</p>
+<pre style="background:#f9f9f9;color:#080808">cp makefile.linux_gfortran makefile
+</pre>
+<p>We are going to use gfortran, so make sure it is installed. There are several package management systems for OS X; I personally like <a href="http://brew.sh/">Homebrew</a>. One point that took me a while to realize was that OS X by default has a case insensitive file system, so preclib.F and preclib.f are the same file. VASP preprocesses the .F files and creates .f files, basically overwriting the original ones. We will need to fix that. Make the following changes to the <code>makefile</code>:</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#234a97">CPP = gcc -E -P -x c $*.F >$*.f90</span>
+<span style="color:#234a97">FFLAGS = -O1 -cpp</span>
+</pre>
+<p>and compile by typing: <code>make</code> and ignore any warnings. It should build the library <code>libdmy.a</code>. Now change over to the main folder <code>vasp.5.3</code> and copy over <code>makefile.linux_gfortran</code> and make the following changes to the file.</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#234a97">FC=gfortran</span>
+<span style="color:#234a97">CPP_ = ./preprocess &lt;$*.F | /usr/bin/cpp -P -C -traditional -w >$*$(SUFFIX)</span>
+<span style="color:#234a97">FFLAGS = -ffree-form -ffree-line-length-0</span>
+<span style="color:#234a97">BLAS= -framework vecLib</span>
+</pre>
+<p>Save the file and type <code>make</code>. Unfortunately, the code is not fully compatible with gfortran, so we will need to make several fixes. One of them is a space between a function call and (. Run the following command to fix files with errors.</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#794938">for</span> <span style="color:#234a97">file</span> <span style="color:#794938">in</span> dfast.F choleski2.F dos.F broyden.F fock.F force.F rot.F main.F<span style="color:#794938">;</span> <span style="color:#794938">do</span>
+  sed -i.bak s/CALLMPI<span style="color:#811f24;font-weight:700">\ </span><span style="color:#811f24;font-weight:700">\(</span>/CALLMPI<span style="color:#811f24;font-weight:700">\(</span>/g <span style="color:#234a97">$file</span><span style="color:#794938">;</span> rm <span style="color:#234a97">$file</span>.bak 
+<span style="color:#794938">done</span>
+sed -i.bak s/CALLMPI_C<span style="color:#811f24;font-weight:700">\ </span><span style="color:#811f24;font-weight:700">\(</span>/CALLMPI_C<span style="color:#811f24;font-weight:700">\(</span>/g main.F<span style="color:#794938">;</span> rm main.F.bak
+</pre>
+<p>Replace the <code>USE us</code> lines in <code>us.F</code> so that it looks like</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#811f24;font-weight:700">1462</span> USE constant
+<span style="color:#811f24;font-weight:700">1463</span> USE us, only : setdij_
+<span style="color:#811f24;font-weight:700">1464</span> <span style="color:#a71d5d;font-style:italic">IMPLICIT NONE</span>
+<span style="color:#811f24;font-weight:700">2695</span> USE wave
+<span style="color:#811f24;font-weight:700">2696</span> USE us, only : augmentation_charge
+<span style="color:#811f24;font-weight:700">2697</span>
+<span style="color:#811f24;font-weight:700">2698</span> <span style="color:#a71d5d;font-style:italic">IMPLICIT NONE</span>
+</pre>
+<p>Now, running <code>make</code> should hopefully compile it.</p>
+]]></content:encoded>
+			<wfw:commentRss>/compile-vasp-on-osx/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">343</post-id>	</item>
+		<item>
+		<title>BibteX from DOI</title>
+		<link>/bibtex-from-doi/</link>
+		<comments>/bibtex-from-doi/#respond</comments>
+		<pubDate>Fri, 21 Mar 2014 01:02:26 +0000</pubDate>
+		<dc:creator><![CDATA[shanavas]]></dc:creator>
+				<category><![CDATA[Research]]></category>
+		<category><![CDATA[bibtex]]></category>
+		<category><![CDATA[doi]]></category>
+
+		<guid isPermaLink="false">http://shanavasv.com/?p=336</guid>
+		<description><![CDATA[I have been using Mendeley for reference management since it&#8217;s inception. It organizes the articles...]]></description>
+				<content:encoded><![CDATA[<p>I have been using <a href="http://www.mendeley.com/">Mendeley</a> for reference management since it&#8217;s inception. It organizes the articles well, keeps the library synced with the cloud and most importantly allows exporting the references as bib files automatically for use in LaTex writing. But I always found the interface rather dull. The more recent <a href="http://www.readcube.com/">ReadCube</a> is fashionable and has some sleek document enhancing abilities. It can download the documents from the internet, fetch references and shows related materials from Google Scholar and PubMed. Unfortunately, the at this time it has poor citation abilities, although the developers promise it&#8217;s coming in early 2014.</p>
+<p>Most publishers have a &#8220;download citation&#8221; button on the article pages, but not all of them export in bib format. Looking for an alternative, I learned that <a href="http://www.crossref.org/">Crossref</a> now has a nice feature with which one can get the bibliography entry from the <a href="http://dx.doi.org/">DOI</a>. More info <a href="http://www.crossref.org/CrossTech/2011/11/turning_dois_into_formatted_ci.html">here</a>. Use the following code at the commandline (needs <a href="http://curl.haxx.se/">curl</a> installed)</p>
+<pre style="background:#f9f9f9;color:#080808">curl -LH <span style="color:#0b6125">"Accept: text/bibliography; style=bibtex"</span> http://dx.doi.org/10.1103/PhysRevLett.112.086802
+</pre>
+<p>which returns:</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#794938">@article</span>{<span style="color:#bf4f24">Shanavas_Satpathy_2014</span>, 
+<span style="color:#0b6125">title</span><span style="color:#794938">=</span><span style="color:#0b6125">{Electric Field Tuning of the Rashba Effect in the Polar Perovskite Structures}</span>,
+<span style="color:#0b6125">volume</span><span style="color:#794938">=</span><span style="color:#0b6125">{112}</span>, <span style="color:#0b6125">ISSN</span><span style="color:#794938">=</span><span style="color:#0b6125">{1079-7114}</span>, 
+<span style="color:#0b6125">url</span><span style="color:#794938">=</span><span style="color:#0b6125">{http://dx.doi.org/10.1103/PhysRevLett.112.086802}</span>, <span style="color:#0b6125">DOI</span><span style="color:#794938">=</span><span style="color:#0b6125">{10.1103/physrevlett.112.086802}</span>, 
+<span style="color:#0b6125">number</span><span style="color:#794938">=</span><span style="color:#0b6125">{8}</span>, 
+<span style="color:#0b6125">journal</span><span style="color:#794938">=</span><span style="color:#0b6125">{Physical Review Letters}</span>, 
+<span style="color:#0b6125">publisher</span><span style="color:#794938">=</span><span style="color:#0b6125">{American Physical Society (APS)}</span>, <span style="color:#0b6125">author</span><span style="color:#794938">=</span><span style="color:#0b6125">{Shanavas, K. V. and Satpathy, S.}</span>, 
+<span style="color:#0b6125">year</span><span style="color:#794938">=</span><span style="color:#0b6125">{2014}</span>, 
+<span style="color:#0b6125">month</span><span style="color:#794938">=</span><span style="color:#0b6125">{Feb}</span>}
+</pre>
+<p>I wrote a function which can be put in the <code>.bashrc</code> file. It will seperate the entry into multiple lines for readability</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#bf4f24">doi2bib</span>() { curl -LH <span style="color:#0b6125">"Accept: text/bibliography; style=bibtex"</span> http://dx.doi.org/<span style="color:#0b6125">"<span style="color:#234a97">$@</span>"</span> <span style="color:#794938">|</span> awk <span style="color:#0b6125">'{sub(",",",\n"); gsub("},","},\n"); print $0}'</span><span style="color:#794938">;</span> }
+</pre>
+<p>To use it, simply run <code>doi2bib 10.1103/PhysRevLett.112.086802</code> from the command line.</p>
+<p>At this stage there are three problems with this method:</p>
+<ol>
+<li>The journal abbreviations are not always used</li>
+<li>The author list is truncated if it is too long</li>
+<li>For many APS articles page numbers are not returned</li>
+</ol>
+]]></content:encoded>
+			<wfw:commentRss>/bibtex-from-doi/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">336</post-id>	</item>
+	</channel>
+</rss>

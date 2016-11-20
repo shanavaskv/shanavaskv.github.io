@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Uncategorized &#8211; Shanavas</title>
+	<atom:link href="/category/uncategorized/feed/" rel="self" type="application/rss+xml" />
+	<link>/</link>
+	<description>Home!</description>
+	<lastBuildDate>Tue, 27 Sep 2016 15:36:17 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>hourly</sy:updatePeriod>
+	<sy:updateFrequency>1</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=4.6.1</generator>
+
+<image>
+	<url>http://i0.wp.com/www.shanavasv.com/wp-content/uploads/2016/08/favicon.png?fit=16%2C16</url>
+	<title>Uncategorized &#8211; Shanavas</title>
+	<link>/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+<site xmlns="com-wordpress:feed-additions:1">115605667</site>	<item>
+		<title>Compile VASP on OSX</title>
+		<link>/compile-vasp-on-osx/</link>
+		<comments>/compile-vasp-on-osx/#respond</comments>
+		<pubDate>Thu, 24 Apr 2014 14:13:07 +0000</pubDate>
+		<dc:creator><![CDATA[shanavas]]></dc:creator>
+				<category><![CDATA[Uncategorized]]></category>
+
+		<guid isPermaLink="false">http://shanavasv.com/?p=343</guid>
+		<description><![CDATA[VASP is a pseudopotential based ab-initio code useful to study electronic structure of materials. Although...]]></description>
+				<content:encoded><![CDATA[<p><a href="https://www.vasp.at/">VASP</a> is a pseudopotential based ab-initio code useful to study electronic structure of materials. Although most calculations are done with the help of parallel computing clusters, it is good to have it on the laptop for some quick testing. However, when I switched to Macbook from a HP Envy laptop running <a href="http://ubuntu.com/">Ubuntu</a>, I realised it is not easy to get it running in OS X. I finally got it to work, with some help from this <a href="http://www.nsc.liu.se/~pla/blog/2011/06/28/vaspcompile/">link</a>.</p>
+<p>Below are the instruction to compile VASP version 5.3.5 with gfortran. First step is to build the vasp.5.lib. Copy the linux_gfortran makefile:</p>
+<pre style="background:#f9f9f9;color:#080808">cp makefile.linux_gfortran makefile
+</pre>
+<p>We are going to use gfortran, so make sure it is installed. There are several package management systems for OS X; I personally like <a href="http://brew.sh/">Homebrew</a>. One point that took me a while to realize was that OS X by default has a case insensitive file system, so preclib.F and preclib.f are the same file. VASP preprocesses the .F files and creates .f files, basically overwriting the original ones. We will need to fix that. Make the following changes to the <code>makefile</code>:</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#234a97">CPP = gcc -E -P -x c $*.F >$*.f90</span>
+<span style="color:#234a97">FFLAGS = -O1 -cpp</span>
+</pre>
+<p>and compile by typing: <code>make</code> and ignore any warnings. It should build the library <code>libdmy.a</code>. Now change over to the main folder <code>vasp.5.3</code> and copy over <code>makefile.linux_gfortran</code> and make the following changes to the file.</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#234a97">FC=gfortran</span>
+<span style="color:#234a97">CPP_ = ./preprocess &lt;$*.F | /usr/bin/cpp -P -C -traditional -w >$*$(SUFFIX)</span>
+<span style="color:#234a97">FFLAGS = -ffree-form -ffree-line-length-0</span>
+<span style="color:#234a97">BLAS= -framework vecLib</span>
+</pre>
+<p>Save the file and type <code>make</code>. Unfortunately, the code is not fully compatible with gfortran, so we will need to make several fixes. One of them is a space between a function call and (. Run the following command to fix files with errors.</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#794938">for</span> <span style="color:#234a97">file</span> <span style="color:#794938">in</span> dfast.F choleski2.F dos.F broyden.F fock.F force.F rot.F main.F<span style="color:#794938">;</span> <span style="color:#794938">do</span>
+  sed -i.bak s/CALLMPI<span style="color:#811f24;font-weight:700">\ </span><span style="color:#811f24;font-weight:700">\(</span>/CALLMPI<span style="color:#811f24;font-weight:700">\(</span>/g <span style="color:#234a97">$file</span><span style="color:#794938">;</span> rm <span style="color:#234a97">$file</span>.bak 
+<span style="color:#794938">done</span>
+sed -i.bak s/CALLMPI_C<span style="color:#811f24;font-weight:700">\ </span><span style="color:#811f24;font-weight:700">\(</span>/CALLMPI_C<span style="color:#811f24;font-weight:700">\(</span>/g main.F<span style="color:#794938">;</span> rm main.F.bak
+</pre>
+<p>Replace the <code>USE us</code> lines in <code>us.F</code> so that it looks like</p>
+<pre style="background:#f9f9f9;color:#080808"><span style="color:#811f24;font-weight:700">1462</span> USE constant
+<span style="color:#811f24;font-weight:700">1463</span> USE us, only : setdij_
+<span style="color:#811f24;font-weight:700">1464</span> <span style="color:#a71d5d;font-style:italic">IMPLICIT NONE</span>
+<span style="color:#811f24;font-weight:700">2695</span> USE wave
+<span style="color:#811f24;font-weight:700">2696</span> USE us, only : augmentation_charge
+<span style="color:#811f24;font-weight:700">2697</span>
+<span style="color:#811f24;font-weight:700">2698</span> <span style="color:#a71d5d;font-style:italic">IMPLICIT NONE</span>
+</pre>
+<p>Now, running <code>make</code> should hopefully compile it.</p>
+]]></content:encoded>
+			<wfw:commentRss>/compile-vasp-on-osx/feed/</wfw:commentRss>
+		<slash:comments>0</slash:comments>
+	<post-id xmlns="com-wordpress:feed-additions:1">343</post-id>	</item>
+	</channel>
+</rss>

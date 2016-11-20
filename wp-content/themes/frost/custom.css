@@ -1,0 +1,57 @@
+/* Enter Custom CSS Below Here */
+
+.pub-box {
+	clear:both;
+	margin: 0 0 20px 0;
+	text-shadow: none;
+	padding: 15px;
+	line-height: 17px;
+	background:#cce6ff;
+	border:1px solid #e6c555;
+}
+.artitle{font-weight: bold; color: #09434e;}
+.arauthor{color: #09434e;}
+.arjournal{font-style: italic;}
+
+/*JOSEFIN FONT
+
+body {
+    font-family: 'Josefin Sans', sans-serif;
+}
+input,
+button,
+select,
+textarea {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+*/
+
+/*DOSIS FONT
+
+body {
+    font-family: 'Dosis', sans-serif;
+}
+input,
+button,
+select,
+textarea {
+    font-family: 'Dosis', sans-serif;
+}
+
+*/
+
+/* HERE's How to keep the logo showing even on scroll
+
+.navbar.fixed .navbar-brand {
+	display: block !important;
+}
+.navbar.fixed .navbar-collapse {
+	float: right !important;
+}
+.navbar.fixed .btn.responsive-menu {
+	float: right !important;
+	margin: 28px auto !important;
+}
+
+*/
