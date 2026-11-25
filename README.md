@@ -1,6 +1,6 @@
 # shanavasv.com
 
-Personal site of Shanavas K. Veedu, built with [Astro](https://astro.build) and deployed to GitHub Pages.
+Personal site of Shanavas Kavu, built with [Astro](https://astro.build) and deployed to GitHub Pages.
 
 ## Develop
 
@@ -14,7 +14,7 @@ npm run build    # static site in dist/
 
 | What | File |
 | --- | --- |
-| Name, bio, links, experience, education | `src/data/profile.ts` |
+| Name, bio, links, impact stats, expertise, selected work, experience, education | `src/data/profile.ts` |
 | Publications and talks | `src/data/publications.json` |
 | Blog posts (Markdown, served at `/<slug>/`) | `src/content/posts/` |
 | Projects (Markdown, served at `/projects/<slug>/`) | `src/content/projects/` |

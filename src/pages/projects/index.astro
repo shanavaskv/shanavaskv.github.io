@@ -5,10 +5,10 @@ import ProjectCard from '../../components/ProjectCard.astro';
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
 const groups = [...new Set(projects.map((p) => p.data.category))];
 ---
-<Base title="Projects" description="Data science and physics projects.">
+<Base title="Research & projects" description="Physics research and early machine learning projects.">
   <div class="wrap wide">
-    <h1>Projects</h1>
-    <p class="lede">Machine learning experiments and research in condensed matter physics.</p>
+    <h1>Research & projects</h1>
+    <p class="lede">Highlights from 14 years of computational physics, and the machine learning projects that started my move into data science.</p>
     {groups.map((g) => (
       <section class="section">
         <div class="section-head"><h2>{g}</h2></div>
