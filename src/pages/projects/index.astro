@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+const groups = [...new Set(projects.map((p) => p.data.category))];
+---
+<Base title="Projects" description="Data science and physics projects.">
+  <div class="wrap wide">
+    <h1>Projects</h1>
+    <p class="lede">Machine learning experiments and research in condensed matter physics.</p>
+    {groups.map((g) => (
+      <section class="section">
+        <div class="section-head"><h2>{g}</h2></div>
+        <div class="grid">{projects.filter((p) => p.data.category === g).map((p) => <ProjectCard project={p} />)}</div>
+      </section>
+    ))}
+  </div>
+</Base>
+<style>
+  .section { margin-top: 3rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 18rem), 1fr)); gap: 1.5rem; }
+</style>

@@ -1,0 +1,345 @@
+{
+  "publications": [
+    {
+      "title": "Electronic structure and electron-phonon coupling in TiH<sub>2</sub>",
+      "authors": "K. V. Shanavas, L. Lindsay, David S. Parker",
+      "journal": "Sci. Rep.",
+      "volume": "6",
+      "page": "28102",
+      "year": 2016,
+      "doi": "10.1038/srep28102"
+    },
+    {
+      "title": "Electronic structure and the origin of the Dzyaloshinskii-Moriya interaction in MnSi",
+      "authors": "K. V. Shanavas, and S. Satpathy",
+      "journal": "Phys. Rev. B",
+      "volume": "93",
+      "page": "195101",
+      "year": 2016,
+      "doi": "10.1103/PhysRevB.93.195101"
+    },
+    {
+      "title": "Theoretical study of the cubic Rashba effect at the SrTiO<sub>3</sub> (001) surfaces",
+      "authors": "K. V. Shanavas",
+      "journal": "Phys. Rev. B",
+      "volume": "93",
+      "page": "045108",
+      "year": 2016,
+      "doi": "10.1103/PhysRevB.93.045108"
+    },
+    {
+      "title": "Doping SrTiO<sub>3</sub> supported FeSe by excess atoms and oxygen vacancies",
+      "authors": "K. V. Shanavas, and David J. Singh",
+      "journal": "Phys. Rev. B",
+      "volume": "92",
+      "page": "035144",
+      "year": 2015,
+      "doi": "10.1103/PhysRevB.92.035144"
+    },
+    {
+      "title": "Effective tight-binding model for MX<sub>2</sub> under electric and magnetic fields",
+      "authors": "K. V. Shanavas, and S. Satpathy",
+      "journal": "Phys. Rev. B",
+      "volume": "91",
+      "page": "235145",
+      "year": 2015,
+      "doi": "10.1103/PhysRevB.91.235145"
+    },
+    {
+      "title": "Overview of theoretical studies of Rashba effect in polar perovskite surfaces",
+      "authors": "K. V. Shanavas",
+      "journal": "J. Electron Spectrosc.",
+      "volume": "201",
+      "page": "121",
+      "year": 2015,
+      "doi": "10.1016/j.elspec.2014.08.005"
+    },
+    {
+      "title": "Electronic and magnetic properties of Si substituted Fe<sub>3</sub>Ge",
+      "authors": "K. V. Shanavas, M. A. McGuire, and D. S. Parker",
+      "journal": "J. Appl. Phys.",
+      "volume": "118",
+      "page": "123902",
+      "year": 2015,
+      "doi": "10.1063/1.4931574"
+    },
+    {
+      "title": "Itinerant magnetism in metallic CuFe<sub>2</sub>Ge<sub>2</sub>",
+      "authors": "K. V. Shanavas, and David Singh",
+      "journal": "PLOS One",
+      "volume": "10",
+      "page": "1371",
+      "year": 2015,
+      "doi": "10.1371/journal.pone.0121186"
+    },
+    {
+      "title": "Theoretical study on the role of dynamics on the unusual magnetic properties in MnBi",
+      "authors": "K. V. Shanavas, David Parker and David J. Singh",
+      "journal": "Sci. Rep.",
+      "volume": "4",
+      "page": "7222",
+      "year": 2014,
+      "doi": "10.1038/srep07222"
+    },
+    {
+      "title": "Theoretical model for Rashba Spin-Orbit Interaction in <i>d</i> Electrons",
+      "authors": "K. V. Shanavas, Z. S. Popović and S. Satpathy",
+      "journal": "Phys. Rev. B",
+      "volume": "90",
+      "page": "165108",
+      "year": 2014,
+      "doi": "10.1103/PhysRevB.90.165108"
+    },
+    {
+      "title": "Electronic structure of Ba<sub>3</sub>CuSb<sub>2</sub>O<sub>9</sub>: A candidate quantum spin liquid compound",
+      "authors": "K. V. Shanavas, Z. S. Popović and S. Satpathy",
+      "journal": "Phys. Rev. B",
+      "volume": "89",
+      "page": "085130",
+      "year": 2014,
+      "doi": "10.1103/PhysRevB.89.085130"
+    },
+    {
+      "title": "Electric Field Tuning of the Rashba Effect in the Polar Perovskite Structures",
+      "authors": "K. V. Shanavas, and S. Satpathy",
+      "journal": "Phys. Rev. Lett.",
+      "volume": "112",
+      "page": "086802",
+      "year": 2014,
+      "doi": "10.1103/PhysRevLett.112.086802"
+    },
+    {
+      "title": "Orbital ordering in La<sub>0.5</sub>Sr<sub>1.5</sub>MnO<sub>4</sub>: Density functional and exact diagonalization studies",
+      "authors": "K. V. Shanavas, and S. Satpathy",
+      "journal": "Phys. Rev. B",
+      "volume": "87",
+      "page": "235137",
+      "year": 2013,
+      "doi": "10.1103/PhysRevB.87.235137"
+    },
+    {
+      "title": "Phase transition and possible metallization in CeVO<sub>4</sub> under pressure",
+      "authors": "Alka B. Garg, K. V. Shanavas, B. N. Wani and S. M. Sharma",
+      "journal": "J. Solid State Chem.",
+      "volume": "203",
+      "page": "273",
+      "year": 2013,
+      "doi": "10.1016/j.jssc.2013.04.036"
+    },
+    {
+      "title": "Pressure induced phase transitions in multiferroic BiFeO<sub>3</sub>",
+      "authors": "A. K. Mishra, K. V. Shanavas, H. K. Poswal, B. P. Mandal, N. Garg and S. M. Sharma",
+      "journal": "Solid State Commun.",
+      "volume": "154",
+      "page": "72",
+      "year": 2012,
+      "doi": "10.1016/j.ssc.2012.10.018"
+    },
+    {
+      "title": "Magnetic properties of Mn-doped Ge<sub>46</sub> and Ba<sub>8</sub>Ge<sub>46</sub> clathrates",
+      "authors": "Nirmal Ganguli, K. V. Shanavas and Indra Dasgupta",
+      "journal": "J. Phys.: Condens. Matter",
+      "volume": "24",
+      "page": "505501",
+      "year": 2012,
+      "doi": "10.1088/0953-8984/24/50/505501"
+    },
+    {
+      "title": "Computer simulations of the crystallization kinetics in amorphous silicon under pressure",
+      "authors": "K. V. Shanavas, K. K. Pandey, N. Garg, and S. M. Sharma",
+      "journal": "J. Appl. Phys.",
+      "volume": "111",
+      "page": "063509",
+      "year": 2012,
+      "doi": "10.1063/1.3694735"
+    },
+    {
+      "title": "First principles study of the effect of organic ligands in the crystal structure of CdS nanoparticles",
+      "authors": "K. V. Shanavas, S. M. Sharma, A. Nag, A. Hazarika, I. Dasgupta and D. D. Sarma",
+      "journal": "J. Phys. Chem. C",
+      "volume": "116",
+      "page": "6507",
+      "year": 2012,
+      "doi": "10.1021/jp2079428"
+    },
+    {
+      "title": "First principles studies on the effect of pressure SiH<sub>4</sub>(H<sub>2</sub>)<sub>2</sub>",
+      "authors": "K. V. Shanavas, H. K. Poswal, Surinder M. Sharma",
+      "journal": "Solid State Commun.",
+      "volume": "152",
+      "page": "877",
+      "year": 2012,
+      "doi": "10.1016/j.ssc.2012.02.012"
+    },
+    {
+      "title": "Memory effect in low-density amorphous silicon under pressure",
+      "authors": "Nandini Garg, K. K. Pandey, K. V. Shanavas, C. A. Betty, Surinder. M. Sharma",
+      "journal": "Phys. Rev. B",
+      "volume": "83",
+      "page": "115202",
+      "year": 2011,
+      "doi": "10.1103/PhysRevB.83.115202"
+    },
+    {
+      "title": "High pressure structural stability of BaLiF<sub>3</sub>",
+      "authors": "A. K. Mishra, N. Garg, K. V. Shanavas, S. N. Achary, A. K. Tyagi and S. M. Sharma",
+      "journal": "J. Appl. Phys.",
+      "volume": "110",
+      "page": "123505",
+      "year": 2011,
+      "doi": "10.1063/1.3670036"
+    },
+    {
+      "title": "Crystal Structure Engineering by Fine-Tuning the Surface Energy: The Case of CdE (E=S/Se) Nanocrystals",
+      "authors": "A. Nag, A. Hazarika, K. V. Shanavas, S. M. Sharma, I. Dasgupta, and D. D. Sarma",
+      "journal": "J. Chem.Phys. Lett.",
+      "volume": "2",
+      "page": "706",
+      "year": 2011,
+      "doi": "10.1021/jz200060a"
+    },
+    {
+      "title": "Pressure induced crystallization in amorphous silicon",
+      "authors": "K. K. Pandey, N. Garg, K. V. Shanavas, Surinder M. Sharma, S. K. Sikka",
+      "journal": "J. Appl. Phys.",
+      "volume": "109",
+      "page": "113511",
+      "year": 2011,
+      "doi": "10.1063/1.3592963"
+    },
+    {
+      "title": "Origin of ferro-electric polarization in spiral magnetic structure of MnWO<sub>4</sub>",
+      "authors": "K. V. Shanavas, Debraj Choudhury, I. Dasgupta, Surinder M. Sharma, and D. D. Sarma",
+      "journal": "Phys. Rev. B",
+      "volume": "81",
+      "page": "212406",
+      "year": 2010,
+      "doi": "10.1103/PhysRevB.81.212406"
+    },
+    {
+      "title": "Zircon-monoclinic-schelite transformation in nano chromates",
+      "authors": "A. K. Mishra, Nandini Garg, K. K. Pandey, K. V. Shanavas, A. K. Tyagi, Surinder M. Sharma",
+      "journal": "Phys. Rev. B",
+      "volume": "81",
+      "page": "104109",
+      "year": 2010,
+      "doi": "10.1103/PhysRevB.81.104109"
+    },
+    {
+      "title": "Phase transitions in argon-filled single walled carbon nanotubes under pressure",
+      "authors": "K. V. Shanavas, and Surinder M. Sharma",
+      "journal": "Phys. Rev. B",
+      "volume": "79",
+      "page": "155425",
+      "year": 2009,
+      "doi": "10.1103/PhysRevB.79.155425"
+    },
+    {
+      "title": "Decomposition of La<sub>2</sub>Hf<sub>2</sub>O<sub>7</sub> under high pressure",
+      "authors": "Nandini Garg, K. K. Pandey, Chitra Murli, K. V. Shanavas, Balaji Mandal, A. K. Tyagi and Surinder M. Sharma",
+      "journal": "Phys. Rev. B",
+      "volume": "77",
+      "page": "214105",
+      "year": 2008,
+      "doi": "10.1103/PhysRevB.77.214105"
+    },
+    {
+      "title": "Si<sub>x</sub>C<sub>1−x</sub>O<sub>2</sub> alloys: A possible route to stabilize carbon-based silica-like solids?",
+      "authors": "Assa Aravindh… K. V. Shanavas …. and T. Uthayathasan",
+      "journal": "Solid State Commun.",
+      "volume": "144",
+      "page": "273",
+      "year": 2007,
+      "doi": "10.1016/j.ssc.2007.09.011"
+    },
+    {
+      "title": "Classical molecular dynamics simulations of behavior of GeO<sub>2</sub> under high pressures and at high temperatures",
+      "authors": "K. V. Shanavas, Nandini Garg, and Surinder M. Sharma",
+      "journal": "Phys. Rev. B",
+      "volume": "73",
+      "page": "094120",
+      "year": 2006,
+      "doi": "10.1103/PhysRevB.73.094120"
+    }
+  ],
+  "talks": [
+    {
+      "title": "Origin of large electron-phonon coupling in metal hydride TiH<sub>2</sub>",
+      "venue": "APS March meeting, Baltimore, MA",
+      "year": 2016,
+      "invited": false
+    },
+    {
+      "title": "Rashba Spin-Orbit Effect and its Electric Field Control",
+      "venue": "SPIE Optics+Photonics, San Diego, CA",
+      "year": 2015,
+      "invited": false
+    },
+    {
+      "title": "Itinerant magnetism in CuFe<sub>2</sub>Ge<sub>2</sub>",
+      "venue": "APS March meeting, San Antonio, TX",
+      "year": 2015,
+      "invited": false
+    },
+    {
+      "title": "Magneto-crystalline anisotropy in MnBi",
+      "venue": "MMM conference, Honolulu, HI",
+      "year": 2014,
+      "invited": false
+    },
+    {
+      "title": "Origin of magnetic anisotropy in MnBi",
+      "venue": "ORPA conference, Oak Ridge, TN",
+      "year": 2014,
+      "invited": false
+    },
+    {
+      "title": "Effect of correlations on the Jahn-Teller distortion in Ba<sub>3</sub>CuSb<sub>2</sub>O<sub>9</sub>",
+      "venue": "Telluride Meeting on emerging materials, Telluride, CO",
+      "year": 2013,
+      "invited": true
+    },
+    {
+      "title": "Electronic structure and the Jahn-Teller distortion in Ba<sub>3</sub>CuSb<sub>2</sub>O<sub>9</sub>",
+      "venue": "APS March meeting, Baltimore, MD",
+      "year": 2013,
+      "invited": false
+    },
+    {
+      "title": "The 2D electron gas and Rashba effect at the perovskite polar surface of KTaO<sub>3</sub>",
+      "venue": "APS March meeting, Baltimore, MD",
+      "year": 2013,
+      "invited": false
+    },
+    {
+      "title": "Rashba spin-orbit coupling at the polar surface of KTaO<sub>3</sub>",
+      "venue": "Condensed Matter Seminar, University of Missouri, MO",
+      "year": 2012,
+      "invited": false
+    },
+    {
+      "title": "Density-functional electronic structure and the origin of the Dzyaloshinskii-Moriya spin interaction in MnSi",
+      "venue": "APS March meeting, Boston, MA",
+      "year": 2012,
+      "invited": false
+    },
+    {
+      "title": "Skyrmions in Solids",
+      "venue": "Talk at APS prairie Section Meeting, Cedar Falls, IA",
+      "year": 2011,
+      "invited": false
+    },
+    {
+      "title": "High pressure phases of carbon nanotubes",
+      "venue": "International Conference on Advanced Materials, Bangalore, India",
+      "year": 2007,
+      "invited": false
+    },
+    {
+      "title": "Effect of argon on the high pressure behavior of carbon nanotubes",
+      "venue": "MRSI high pressure meeting, New Delhi, India",
+      "year": 2006,
+      "invited": false
+    }
+  ]
+}

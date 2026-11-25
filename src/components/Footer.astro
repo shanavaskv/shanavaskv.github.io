@@ -1,0 +1,20 @@
+---
+import { profile } from '../data/profile';
+---
+<footer>
+  <div class="wrap wide row">
+    <span>© {new Date().getFullYear()} {profile.name}</span>
+    <span class="links">
+      <a href={`mailto:${profile.email}`}>Email</a>
+      {profile.links.map((l) => <a href={l.href} rel="me">{l.label}</a>)}
+      <a href="/rss.xml">RSS</a>
+    </span>
+  </div>
+</footer>
+<style>
+  footer { border-top: 1px solid var(--line); padding: 2rem 0 3rem; font-size: 0.9rem; color: var(--muted); }
+  .row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .links { display: flex; gap: 1.1rem; flex-wrap: wrap; }
+  .links a { color: var(--muted); }
+  .links a:hover { color: var(--text); }
+</style>
