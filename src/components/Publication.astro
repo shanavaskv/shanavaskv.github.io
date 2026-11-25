@@ -1,0 +1,21 @@
+---
+interface Props {
+  pub: { title: string; authors: string; journal: string; volume: string; page: string; year: number | null; doi: string | null };
+}
+const { pub } = Astro.props;
+const authors = pub.authors.replace('K. V. Shanavas', '<strong>K. V. Shanavas</strong>');
+---
+<li class="pub">
+  <span class="title" set:html={pub.title} />
+  <span class="authors muted" set:html={authors} />
+  <span class="venue muted">
+    <em>{pub.journal}</em> {pub.volume}, {pub.page} ({pub.year})
+    {pub.doi && <> · <a href={`https://doi.org/${pub.doi}`}>DOI</a></>}
+  </span>
+</li>
+<style>
+  .pub { display: flex; flex-direction: column; gap: 0.15rem; padding: 0.9rem 0; border-bottom: 1px solid var(--line); }
+  .title { font: 500 1.08rem/1.4 var(--serif); }
+  .authors, .venue { font-size: 0.9rem; }
+  .authors :global(strong) { color: var(--text); font-weight: 600; }
+</style>

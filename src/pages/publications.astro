@@ -1,0 +1,35 @@
+---
+import Base from '../layouts/Base.astro';
+import Publication from '../components/Publication.astro';
+import data from '../data/publications.json';
+const years = [...new Set(data.publications.map((p) => p.year))].sort((a, b) => (b ?? 0) - (a ?? 0));
+---
+<Base title="Publications" description="Peer-reviewed papers and conference talks in condensed matter physics.">
+  <div class="wrap">
+    <h1>Publications</h1>
+    <p class="lede">{data.publications.length} peer-reviewed papers on electronic structure, magnetism, spin-orbit physics and materials under pressure.</p>
+    {years.map((y) => (
+      <section>
+        <h2 class="year">{y}</h2>
+        <ul class="plain">{data.publications.filter((p) => p.year === y).map((p) => <Publication pub={p} />)}</ul>
+      </section>
+    ))}
+    <section class="section" id="talks">
+      <div class="section-head"><h2>Conferences &amp; talks</h2></div>
+      <ul class="plain">
+        {data.talks.map((t) => (
+          <li class="talk">
+            <span class="title" set:html={t.title} />
+            <span class="muted small">{t.invited && 'Invited talk · '}{t.venue}{t.year && ` (${t.year})`}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </div>
+</Base>
+<style>
+  .plain { list-style: none; padding: 0; margin: 0; }
+  .year { font-size: 1.1rem; color: var(--accent); font-family: var(--sans); font-weight: 600; margin: 2.25rem 0 0.25rem; font-variant-numeric: tabular-nums; }
+  .talk { display: flex; flex-direction: column; padding: 0.75rem 0; border-bottom: 1px solid var(--line); }
+  .talk .title { font: 500 1.05rem/1.4 var(--serif); }
+</style>

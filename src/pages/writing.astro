@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { byDateDesc } from '../lib/format';
+const posts = (await getCollection('posts', (p) => !p.data.draft)).sort(byDateDesc);
+---
+<Base title="Writing" description="Notes on scientific computing, tools and data science.">
+  <div class="wrap">
+    <h1>Writing</h1>
+    <p class="lede">Notes on scientific computing, developer tools and data science.</p>
+    <PostList posts={posts} />
+  </div>
+</Base>

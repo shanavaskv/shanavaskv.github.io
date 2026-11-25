@@ -1,0 +1,125 @@
+:root {
+  --bg: #fafaf9;
+  --surface: #ffffff;
+  --surface-2: #f4f4f2;
+  --text: #16161a;
+  --muted: #5d5d66;
+  --line: #e7e6e3;
+  --accent: #4f46e5;
+  --accent-2: #0ea5a4;
+  --accent-soft: #eef0ff;
+  --code-bg: #f3f3f1;
+  --shadow: 0 1px 2px rgb(16 16 24 / 0.04), 0 8px 24px -12px rgb(16 16 24 / 0.12);
+  --display: 'Inter Tight', 'Inter', system-ui, sans-serif;
+  --serif: var(--display);
+  --sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --measure: 46rem;
+  --radius: 16px;
+  color-scheme: light;
+}
+:root[data-theme='dark'] {
+  --bg: #0c0c10;
+  --surface: #15151b;
+  --surface-2: #1b1b22;
+  --text: #ececf1;
+  --muted: #a0a0ad;
+  --line: #26262f;
+  --accent: #8b87ff;
+  --accent-2: #3dd6d0;
+  --accent-soft: #1d1c3a;
+  --code-bg: #1a1a21;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0c0c10;
+    --surface: #15151b;
+    --surface-2: #1b1b22;
+    --text: #ececf1;
+    --muted: #a0a0ad;
+    --line: #26262f;
+    --accent: #8b87ff;
+    --accent-2: #3dd6d0;
+    --accent-soft: #1d1c3a;
+    --code-bg: #1a1a21;
+    --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -12px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 400 1.0625rem/1.65 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.15; letter-spacing: -0.025em; }
+h1 { font-size: clamp(2.2rem, 5.5vw, 3.4rem); margin: 0 0 0.6rem; }
+h2 { font-size: clamp(1.5rem, 3vw, 1.9rem); margin: 2.5rem 0 1rem; }
+h3 { font-size: 1.25rem; margin: 2rem 0 0.5rem; }
+
+.wrap { max-width: var(--measure); margin: 0 auto; padding: 0 1.25rem; }
+.wide { max-width: 72rem; }
+main { padding: 2.5rem 0 5rem; }
+
+.eyebrow {
+  font: 600 0.75rem/1.2 var(--sans);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 0.9rem;
+}
+.lede { font-size: 1.2rem; color: var(--muted); max-width: 38rem; }
+.muted { color: var(--muted); }
+.small { font-size: 0.9rem; }
+
+.section { margin-top: clamp(4rem, 9vw, 6.5rem); scroll-margin-top: 5rem; }
+.section-head { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1.75rem; }
+.section-head p { margin: 0.4rem 0 0; color: var(--muted); max-width: 36rem; }
+.section-head h2 { margin: 0; }
+.section-head a { font-size: 0.9rem; white-space: nowrap; }
+
+.tag {
+  display: inline-block;
+  font-size: 0.78rem;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  margin: 0 0.3rem 0.3rem 0;
+}
+
+/* Long-form content */
+.prose { max-width: var(--measure); }
+.prose p, .prose ul, .prose ol { margin: 0 0 1.2rem; }
+.prose img { max-height: 30rem; width: auto; border-radius: 8px; margin: 2rem auto 0.75rem; border: 1px solid var(--line); background: #fff; }
+.prose code { font: 0.88em var(--mono); background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; }
+.prose pre { font: 0.86rem/1.55 var(--mono); padding: 1rem 1.15rem; border-radius: 8px; overflow-x: auto; border: 1px solid var(--line); margin: 0 0 1.5rem; }
+.prose pre code { background: none; padding: 0; font-size: inherit; }
+.prose blockquote { margin: 1.5rem 0; padding-left: 1rem; border-left: 3px solid var(--line); color: var(--muted); }
+.prose .katex-display { overflow-x: auto; overflow-y: hidden; padding: 0.25rem 0; }
+
+/* Shiki dual themes */
+:root[data-theme='dark'] .astro-code, :root[data-theme='dark'] .astro-code span { color: var(--shiki-dark) !important; background-color: var(--shiki-dark-bg) !important; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) .astro-code, :root:not([data-theme='light']) .astro-code span { color: var(--shiki-dark) !important; background-color: var(--shiki-dark-bg) !important; }
+}
+
+.card-base { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+.btn { display: inline-flex; align-items: center; gap: 0.45rem; background: var(--text); color: var(--bg); padding: 0.7rem 1.2rem; border-radius: 999px; text-decoration: none; font-weight: 500; font-size: 0.95rem; transition: transform 0.15s; }
+.btn:hover { transform: translateY(-1px); }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+.btn-ghost:hover { border-color: var(--text); }
+.grad { background: linear-gradient(100deg, var(--accent), var(--accent-2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+html { scroll-behavior: smooth; }
